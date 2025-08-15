@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cricket Panel • Demo (No Real Money)</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Demo cricket betting-style panel for learning. No real-money, no payments." />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">🏏</span>
+      <strong>Cricket Panel</strong>
+      <span class="badge">DEMO</span>
+    </div>
+    <div class="header-actions">
+      <div class="wallet" aria-live="polite">
+        <span>Wallet:</span>
+        <strong id="wallet-balance">₹10,000</strong>
+      </div>
+      <button class="btn ghost" id="btn-add-funds" type="button">Add Demo Funds</button>
+      <button class="btn ghost" id="btn-reset" type="button" title="Reset demo">Reset</button>
+    </div>
+  </header>
+
+  <div class="notice">
+    This is a <b>demo / mock</b> panel for learning only — <u>no real-money</u>, no payments, no withdrawal. 
+    Check local laws before building anything real.
+  </div>
+
+  <main class="layout">
+    <!-- LEFT: Matches & Markets -->
+    <section class="left">
+      <div class="card matchcard">
+        <div class="match-top">
+          <div class="match-meta">
+            <label for="match-select">Match</label>
+            <select id="match-select" aria-label="Select match">
+              <!-- populated by JS -->
+            </select>
+          </div>
+          <div class="live-dot" id="live-dot" title="Simulated live">LIVE</div>
+        </div>
+
+        <div class="score-wrap" id="score-wrap" aria-live="polite">
+          <!-- dynamic scoreboard -->
+        </div>
+      </div>
+
+      <div class="card markets">
+        <h2>Markets</h2>
+
+        <div class="market" data-market="match_winner">
+          <div class="market-head">
+            <h3>Match Winner</h3>
+            <small id="mw-last-updated"></small>
+          </div>
+          <div class="outcomes" id="mw-outcomes">
+            <!-- odds buttons via JS -->
+          </div>
+        </div>
+
+        <div class="market" data-market="over_runs">
+          <div class="market-head">
+            <h3>Current Over — Runs Over/Under</h3>
+            <small id="ou-last-updated"></small>
+          </div>
+          <div class="outcomes" id="ou-outcomes">
+            <!-- odds buttons via JS -->
+          </div>
+        </div>
+
+        <div class="market" data-market="top_batter">
+          <div class="market-head">
+            <h3>Top Batter (Most Runs)</h3>
+            <small id="tb-last-updated"></small>
+          </div>
+          <div class="outcomes grid" id="tb-outcomes">
+            <!-- odds buttons via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: Bet Slip & History -->
+    <aside class="right">
+      <div class="card slip">
+        <h2>Bet Slip</h2>
+        <div id="slip-empty">No selection yet. Click an odds button.</div>
+        <div id="slip-items"></div>
+
+        <div class="slip-actions">
+          <div class="totals">
+            <div>Stake</div>
+            <input type="number" id="stake" min="10" step="10" value="100" />
+            <div>Potential Return</div>
+            <strong id="potential">₹0</strong>
+          </div>
+          <button class="btn primary" id="place-bet" disabled>Place Bet</button>
+        </div>
+      </div>
+
+      <div class="card bets">
+        <div class="tabs">
+          <button class="tab active" data-tab="open">Open Bets</button>
+          <button class="tab" data-tab="settled">Settled</button>
+        </div>
+        <div class="tabpanes">
+          <div id="open-bets" class="pane active" aria-live="polite"></div>
+          <div id="settled-bets" class="pane" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div class="card admin">
+        <h2>Demo Controls</h2>
+        <button class="btn" id="simulate-over">Simulate Over</button>
+        <button class="btn" id="settle-match">Settle Match</button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Add Funds Modal -->
+  <dialog id="funds-dialog" aria-label="Add demo funds">
+    <form method="dialog" class="dialog-card">
+      <h3>Add Demo Funds</h3>
+      <p>This adds fake money to your wallet for testing.</p>
+      <input type="number" id="funds-amount" min="100" step="100" value="1000" />
+      <menu>
+        <button value="cancel" class="btn ghost">Cancel</button>
+        <button id="confirm-add" class="btn primary" value="default">Add</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <footer class="app-footer">
+    <small>© Demo Panel — Educational use only</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
