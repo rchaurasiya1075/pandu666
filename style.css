@@ -1,0 +1,126 @@
+:root{
+  --bg:#0b0f14;
+  --card:#121826;
+  --muted:#9aa4b2;
+  --text:#e8eef7;
+  --accent:#2f6dff;
+  --win:#15b66d;
+  --lose:#ff4d4d;
+  --ghost:#1b2333;
+  --chip:#0e1726;
+  --ring: #2a3550;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  background: radial-gradient(1200px 600px at 60% -10%, #162033 0%, #0b0f14 50%) fixed;
+  color:var(--text);
+}
+
+.app-header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 20px; border-bottom:1px solid var(--ring); background:#0d1422a6; backdrop-filter: blur(6px); position:sticky; top:0; z-index:10;
+}
+.brand{display:flex; gap:8px; align-items:center; font-size:18px}
+.logo{font-size:22px}
+.badge{background:var(--chip); padding:2px 8px; border-radius:999px; font-size:12px; color:var(--muted); border:1px solid var(--ring)}
+.header-actions{display:flex; gap:10px; align-items:center}
+.wallet{display:flex; gap:8px; align-items:center}
+.btn{
+  border:1px solid var(--ring); background:var(--accent); color:white; padding:10px 14px; border-radius:10px;
+  font-weight:600; cursor:pointer; transition: transform .08s ease, box-shadow .2s ease;
+}
+.btn:active{transform:scale(0.98)}
+.btn.ghost{background:transparent; color:var(--text)}
+.btn.primary{box-shadow: 0 8px 22px rgba(47,109,255,.25)}
+
+.notice{
+  border:1px dashed var(--ring); margin:16px; padding:10px 14px; color:var(--muted); border-radius:10px; background: #0e1524;
+}
+
+.layout{display:grid; grid-template-columns: 1.4fr .9fr; gap:16px; padding:16px; align-items:start}
+.card{
+  background:linear-gradient(180deg, #121826 0%, #0f1522 100%);
+  border:1px solid var(--ring); border-radius:14px; padding:16px; box-shadow: inset 0 1px 0 #233054;
+}
+.left .card + .card{margin-top:16px}
+
+.matchcard .match-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px}
+.match-meta label{display:block; font-size:12px; color:var(--muted); margin-bottom:6px}
+#match-select{background:#0e1726; color:var(--text); border:1px solid var(--ring); border-radius:10px; padding:10px 12px}
+
+.live-dot{
+  padding:2px 10px; border-radius:999px; background:#ff3b3b; color:white; font-weight:700; letter-spacing:.6px;
+  box-shadow:0 0 0 6px rgba(255,59,59,.15);
+  animation: pulse 1.1s infinite ease-in-out;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 6px rgba(255,59,59,.15)}
+  50%{box-shadow:0 0 0 10px rgba(255,59,59,.08)}
+  100%{box-shadow:0 0 0 6px rgba(255,59,59,.15)}
+}
+
+.score-wrap{
+  display:grid; grid-template-columns:1fr 1fr; gap:12px;
+}
+.score{
+  background:var(--chip); border:1px solid var(--ring); border-radius:12px; padding:12px;
+}
+.score .teams{display:flex; justify-content:space-between; font-weight:700; margin-bottom:8px}
+.score .detail{display:flex; gap:14px; color:var(--muted); font-size:13px}
+
+.markets h2{margin:0 0 8px 0}
+.market{padding:12px; border:1px solid var(--ring); border-radius:12px; background: #0c1425; margin-top:12px}
+.market-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px}
+.market .outcomes{display:flex; gap:10px; flex-wrap:wrap}
+.market .outcomes.grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap:10px}
+.outcome{
+  display:flex; justify-content:space-between; align-items:center;
+  gap:12px; padding:12px; background: #0f192c; border: 1px solid var(--ring); border-radius:12px; cursor:pointer;
+  min-width:160px; flex:1;
+}
+.outcome:hover{outline:1px solid var(--accent)}
+.outcome .name{font-weight:700}
+.odds{font-feature-settings:"tnum" 1; font-variant-numeric: tabular-nums; background:#0d1526; padding:6px 10px; border-radius:8px; border:1px solid var(--ring)}
+
+.right .card{position:sticky; top:78px}
+.slip h2, .bets h2{margin-top:0}
+
+#slip-empty{color:var(--muted); padding:8px 0}
+#slip-items{display:flex; flex-direction:column; gap:10px}
+.slip-item{
+  border:1px solid var(--ring); border-radius:10px; padding:10px; background:#0b1221;
+}
+.slip-item .row{display:flex; justify-content:space-between; gap:8px; align-items:center}
+.slip-item .meta{color:var(--muted); font-size:12px}
+.slip-actions{margin-top:12px; display:grid; gap:10px}
+.totals{display:grid; grid-template-columns:1fr 1fr; gap:10px; align-items:center}
+.totals input{background:#0e1726; color:var(--text); border:1px solid var(--ring); border-radius:10px; padding:10px}
+
+.tabs{display:flex; gap:6px; margin-bottom:8px}
+.tab{background:#0e1726; border:1px solid var(--ring); color:var(--text); padding:8px 10px; border-radius:10px; cursor:pointer}
+.tab.active{background:#15213a}
+.pane{display:none}
+.pane.active{display:block}
+.betrow{
+  display:grid; grid-template-columns: 1.6fr .7fr .7fr .7fr; gap:8px; align-items:center;
+  padding:10px; border:1px solid var(--ring); border-radius:10px; background:#0b1221; margin-bottom:8px;
+}
+.badge.win{background:#062619; border:1px solid #0f9b5b}
+.badge.lose{background:#2a0c0c; border:1px solid #a12a2a}
+
+.dialog-card{
+  background: #0d1526; color: var(--text);
+  border:1px solid var(--ring); border-radius:14px; padding:16px; min-width: 320px;
+}
+dialog::backdrop{background: rgba(0,0,0,.55)}
+
+.app-footer{padding:16px; text-align:center; color:var(--muted)}
+
+@media (max-width: 980px){
+  .layout{grid-template-columns:1fr; }
+  .right .card{position:initial}
+}
