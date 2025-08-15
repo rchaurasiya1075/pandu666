@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cricket Panel • Demo (No Real Money)</title>
   <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="Demo cricket betting-style panel for learning. No real-money, no payments." />
+  <meta name="description" content="Demo cricket betting-style panel with manual deposits/withdraws (admin approved). No real-money." />
 </head>
 <body>
   <header class="app-header">
@@ -17,16 +17,15 @@
     <div class="header-actions">
       <div class="wallet" aria-live="polite">
         <span>Wallet:</span>
-        <strong id="wallet-balance">₹10,000</strong>
+        <strong id="wallet-balance">₹0</strong>
       </div>
-      <button class="btn ghost" id="btn-add-funds" type="button">Add Demo Funds</button>
+      <a class="btn ghost" href="admin.html" title="Open admin (demo)">Admin</a>
       <button class="btn ghost" id="btn-reset" type="button" title="Reset demo">Reset</button>
     </div>
   </header>
 
   <div class="notice">
-    This is a <b>demo / mock</b> panel for learning only — <u>no real-money</u>, no payments, no withdrawal. 
-    Check local laws before building anything real.
+    <b>Disclaimer:</b> Ye <b>demo/mock</b> UI hai — koi real payment/real-money nahi. Manual deposit/withdraw sirf learning ke liye localStorage me simulate hota hai.
   </div>
 
   <main class="layout">
@@ -36,16 +35,12 @@
         <div class="match-top">
           <div class="match-meta">
             <label for="match-select">Match</label>
-            <select id="match-select" aria-label="Select match">
-              <!-- populated by JS -->
-            </select>
+            <select id="match-select" aria-label="Select match"></select>
           </div>
           <div class="live-dot" id="live-dot" title="Simulated live">LIVE</div>
         </div>
 
-        <div class="score-wrap" id="score-wrap" aria-live="polite">
-          <!-- dynamic scoreboard -->
-        </div>
+        <div class="score-wrap" id="score-wrap" aria-live="polite"></div>
       </div>
 
       <div class="card markets">
@@ -56,9 +51,7 @@
             <h3>Match Winner</h3>
             <small id="mw-last-updated"></small>
           </div>
-          <div class="outcomes" id="mw-outcomes">
-            <!-- odds buttons via JS -->
-          </div>
+          <div class="outcomes" id="mw-outcomes"></div>
         </div>
 
         <div class="market" data-market="over_runs">
@@ -66,9 +59,7 @@
             <h3>Current Over — Runs Over/Under</h3>
             <small id="ou-last-updated"></small>
           </div>
-          <div class="outcomes" id="ou-outcomes">
-            <!-- odds buttons via JS -->
-          </div>
+          <div class="outcomes" id="ou-outcomes"></div>
         </div>
 
         <div class="market" data-market="top_batter">
@@ -76,10 +67,39 @@
             <h3>Top Batter (Most Runs)</h3>
             <small id="tb-last-updated"></small>
           </div>
-          <div class="outcomes grid" id="tb-outcomes">
-            <!-- odds buttons via JS -->
-          </div>
+          <div class="outcomes grid" id="tb-outcomes"></div>
         </div>
+      </div>
+
+      <div class="card">
+        <h2>Manual Deposit (Demo)</h2>
+        <form id="deposit-form" class="grid-form">
+          <label>Amount (₹)
+            <input required type="number" min="100" step="50" id="dep-amount" placeholder="1000" />
+          </label>
+          <label>UTR / Txn ID
+            <input required type="text" id="dep-utr" placeholder="12-digit UTR" />
+          </label>
+          <label>Screenshot URL (optional)
+            <input type="url" id="dep-ss" placeholder="https://…" />
+          </label>
+          <button class="btn primary" type="submit">Submit Deposit</button>
+        </form>
+        <small class="muted">Admin page se approve hone par wallet update hoga.</small>
+      </div>
+
+      <div class="card">
+        <h2>Withdraw Request (Demo)</h2>
+        <form id="withdraw-form" class="grid-form">
+          <label>Amount (₹)
+            <input required type="number" min="100" step="50" id="wd-amount" placeholder="500" />
+          </label>
+          <label>UPI ID
+            <input required type="text" id="wd-upi" placeholder="name@bank" />
+          </label>
+          <button class="btn primary" type="submit">Request Withdraw</button>
+        </form>
+        <small class="muted">Admin approve karega to status PAID ho jayega (demo).</small>
       </div>
     </section>
 
@@ -105,10 +125,12 @@
         <div class="tabs">
           <button class="tab active" data-tab="open">Open Bets</button>
           <button class="tab" data-tab="settled">Settled</button>
+          <button class="tab" data-tab="payments">Payments</button>
         </div>
         <div class="tabpanes">
           <div id="open-bets" class="pane active" aria-live="polite"></div>
           <div id="settled-bets" class="pane" aria-live="polite"></div>
+          <div id="payments-pane" class="pane" aria-live="polite"></div>
         </div>
       </div>
 
@@ -119,19 +141,6 @@
       </div>
     </aside>
   </main>
-
-  <!-- Add Funds Modal -->
-  <dialog id="funds-dialog" aria-label="Add demo funds">
-    <form method="dialog" class="dialog-card">
-      <h3>Add Demo Funds</h3>
-      <p>This adds fake money to your wallet for testing.</p>
-      <input type="number" id="funds-amount" min="100" step="100" value="1000" />
-      <menu>
-        <button value="cancel" class="btn ghost">Cancel</button>
-        <button id="confirm-add" class="btn primary" value="default">Add</button>
-      </menu>
-    </form>
-  </dialog>
 
   <footer class="app-footer">
     <small>© Demo Panel — Educational use only</small>
