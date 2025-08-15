@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin • Demo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="logo">🛠️</span>
+      <strong>Admin Panel</strong>
+      <span class="badge">DEMO</span>
+    </div>
+    <div class="header-actions">
+      <a class="btn ghost" href="index.html">← Back to App</a>
+      <button class="btn ghost" id="btn-reset">Reset</button>
+    </div>
+  </header>
+
+  <div class="notice">
+    Ye page <b>localStorage</b> par kaam karta hai. Yaha se deposits/withdrawals approve/reject karoge to index page me wallet update hoga.
+  </div>
+
+  <main class="layout single">
+    <section class="left">
+      <div class="card">
+        <h2>Pending Deposits</h2>
+        <div id="pending-deposits"></div>
+      </div>
+
+      <div class="card">
+        <h2>Pending Withdrawals</h2>
+        <div id="pending-withdrawals"></div>
+      </div>
+
+      <div class="card">
+        <h2>All Transactions (History)</h2>
+        <div id="all-history"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <small>Admin actions are simulated for demo only.</small>
+  </footer>
+
+  <script src="admin.js"></script>
+</body>
+</html>
